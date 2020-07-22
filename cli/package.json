@@ -1,0 +1,79 @@
+{
+  "name": "wpsniff",
+  "version": "0.0.1",
+  "description": "WordPress Code Sniffer",
+  "bin": {
+    "wpsniff": "bin/wpsniff"
+  },
+  "main": "lib/cli.js",
+  "scripts": {
+    "build": "npm run clean && cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "cover": "cross-env BABEL_ENV=commonjs istanbul cover _mocha -- --require babel-core/register --recursive",
+    "lint": "eslint src test",
+    "postversion": "git push && git push --tags",
+    "pre-publish": "npm run clean && npm run lint && npm run test && npm run build",
+    "preversion": "npm run clean && npm run lint && npm test",
+    "test": "npm run build && cross-env BABEL_ENV=commonjs mocha --require @babel/register --recursive",
+    "version": "npm run build && git add -A .",
+    "watch": "npm run clean && cross-env BABEL_ENV=commonjs babel src --watch --out-dir lib"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.10.3",
+    "@wordpress/env": "^1.6.0",
+    "chalk": "^4.1.0",
+    "docker-compose": "^0.23.5",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.0",
+    "js-yaml": "^3.14.0",
+    "nodegit": "^0.26.5",
+    "ora": "^4.0.4",
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.4",
+    "yargs": "^15.4.0"
+  },
+  "devDependencies": {
+    "@10up/eslint-config": "^2.0.0",
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-transform-runtime": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/register": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsdoc": "^22.2.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^8.0.1",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "sinon": "^9.0.2",
+    "temp": "^0.9.1"
+  },
+  "author": "Ivan Kristianto",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ivankristianto/wpsniff.git"
+  },
+  "keywords": [
+    "wpsniff",
+    "cli",
+    "wordpress",
+    "security"
+  ],
+  "bugs": {
+    "url": "https://github.com/ivankristianto/wpsniff/issues"
+  }
+}
